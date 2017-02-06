@@ -22,3 +22,15 @@ jupyter notebook Traffic_Sign_Classifier.ipynb
 ```
 3. Follow the instructions in the `Traffic_Sign_Recognition.ipynb` notebook.
 # CarND-Traffic-Sign-Classifier
+
+# My Work on the project:
+
+* Initial Attempt:
+
+The work follows Le-Net architecture without much pre-processing:
+
+2 convolution layers followed by 2 fully connected layers.
+
+I created visualizations to better understand the nature of training. Courtesy Martin Groners tensorflowvisu file to which I made modifications.
+
+* Run the tf_traffic_sign_classification.py file and the visualizations spring to life. Don't forget to download the traffic-sign-data.zip file and unzip it before proceeding forward.
