@@ -315,8 +315,8 @@ allweights = tf.concat(0, [tf.reshape(conv1_W, [-1]), tf.reshape(conv2_W, [-1]),
 allbiases  = tf.concat(0, [tf.reshape(conv1_b, [-1]), tf.reshape(conv2_b, [-1]), tf.reshape(fc1_b, [-1]), tf.reshape(fc2_b, [-1]), tf.reshape(fc3_b, [-1])])
 conv_activations = tf.concat(0, [tf.reshape(tf.reduce_max(conv1, [0]), [-1]), tf.reshape(tf.reduce_max(conv2, [0]), [-1])])
 dense_activations = tf.concat(0, [tf.reshape(tf.reduce_max(fc1, [0]), [-1]), tf.reshape(tf.reduce_max(fc2, [0]), [-1])])
-# I = tensorflowvisu.tf_format_mnist_images(X, Y, Y_)
-# It = tensorflowvisu.tf_format_mnist_images(X, Y, Y_, 1000, lines=25)
+#I = tensorflowvisu.tf_format_mnist_images(X, logits, one_hot_y)
+#It = tensorflowvisu.tf_format_mnist_images(X, logits, one_hot_y, 1000, lines=25)
 datavis = tensorflowvisu.MnistDataVis()
 #datavis = tensorflowvisu.MnistDataVis(title4="batch-max conv activations", title5="batch-max dense activations", histogram4colornum=2, histogram5colornum=2)
 
@@ -327,24 +327,6 @@ train_step = tf.train.AdamOptimizer(rate).minimize(cross_entropy)
 init = tf.global_variables_initializer()
 sess = tf.Session()
 sess.run(init)
-
-# # Starting values for epoch and offset
-# epoch = 0
-# offset = 0
-#
-# def next_batch(X_train, y_train, BATCH_SIZE, epoch, offset):
-#     num_examples = len(X_train)
-#     end = offset + BATCH_SIZE
-#     if end < num_examples:
-#         batch_X, batch_Y = X_train[offset:end], y_train[offset:end]
-#         offset = offset + BATCH_SIZE
-#         return batch_X, batch_Y, epoch, offset
-#     else:
-#         batch_X, batch_Y = X_train[offset:num_examples], y_train[offset:num_examples]
-#         offset = 0
-#         epoch += 1
-#         print ("One epoch complete, going to epoch number: ", epoch)
-#         return batch_X, batch_Y, epoch, offset
 
 
 # You can call this function in a loop to train the model, 100 images at a time
@@ -381,7 +363,7 @@ def training_step(i, update_test_data, update_train_data):
 
     # compute test values for visualisation
     if update_test_data:
-        a, c = sess.run([accuracy, cross_entropy], {X: X_validation, Y_: y_validation})
+        a, c= sess.run([accuracy, cross_entropy], {X: X_validation, Y_: y_validation})
         # a, c, im = sess.run([accuracy, cross_entropy, It],
         #                    {X: mnist.test.images, Y_: mnist.test.labels, tst: True, pkeep: 1.0})
         print(str(i) + ": ********* epoch " +
