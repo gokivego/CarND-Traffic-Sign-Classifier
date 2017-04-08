@@ -835,6 +835,12 @@ I collected various traffic sign images from the web with different colors combi
     Prediction: 13 	| Yield
     Prediction: 5 	| Speed limit (80km/h)
 
+The model accuracy on the 30 trial images is pretty poor. Only a 50% accuracy. The accuracy on the test dataset is 94.8%.
+** Reasons **
+1. The images in the trial set are not all part of the traffic sign data. There a number of new images in the trial set that the moel isn;t even aware of like (Speed Limit 40km/hr, Give way etc.,). So the model is bound to make wrong predictions on these hence results in a lower accuracy
+
+Of the 5 trial images that I displayed above 4 of the images were classified correctly, i.e., an accuracy of 80%
+
 ### Top 5 Predictions on the Trial Images
 
 I randomly selected 5 trial images and then predicted the top 5 class predictions by the model. The predictions are as such:
@@ -846,6 +852,17 @@ I randomly selected 5 trial images and then predicted the top 5 class prediction
 ![alt text][image11]
 
 
+The above 5 trial images say that the model was pretty sure when it predicted the sign.
+The 4th trial image couldn't be predicted or doesn't appear in the top_5 predictions because there is no class for a sign with name speed limit - 40km/hr. Hence the model didn't know what to predict, although the model realized that it is related to traffic signs.
 
+1. Image 1 - Priority Road - The model predicts this correctly with 100% certainity
+
+2. Image 2 - Speed Limit 30km/hr - The model predicts this with 100% certainity as well. Also, we can see that in the top 5 predictions, the options are all related to the speed limits. This is something we want and hence talks of the robustness of the model.
+
+3. Image 3 - Right-of-way at the next intersection - The model predicts this correctly with 100% certainity.
+
+4. Image 4 - Speed Limit 40km/hr - The model is not able to predict this because the traffic sign Speed Limit 40km/hr doesn't figure in the 42 class of traffic signs the model is trained on. Yet, in the top k predictions the model correctly recognizes the traffic sign as belong to a speed limit.
+
+5. Image 5 - Vehicles over 3.5 metric tonnes predicted - The prediction is correct. Although the image is taken from the web and is not exactly that of the predicted traffic sign. I assigned it to that class because of its close resemblance to the Vehicles over 3.5 metric tonnes prohoboted class. The model predicted it correctly with 100% certainity.
 
 
